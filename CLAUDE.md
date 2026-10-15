@@ -120,6 +120,9 @@ npx supabase db push # Appliquer les migrations
 - Honeypot anti-spam sur le formulaire public
 - Consentement RGPD obligatoire avec mention explicite du transfert aux artisans
 - Ne jamais exposer SUPABASE_SERVICE_ROLE_KEY côté client
+- Le client admin (lib/supabase/admin.ts) s'utilise côté serveur uniquement (server actions et server components), protégé par `server-only`
+- Rate limit submitLead : 5 leads max par heure et par ip_hash (HMAC de l'IP), calculé depuis la table leads
+- Photos des leads : bucket privé lead-photos, chemins stockés dans leads.photos, accès par URL signées via le client admin
 
 ## Environnement
 
@@ -128,6 +131,7 @@ NEXT_PUBLIC_SUPABASE_URL
 NEXT_PUBLIC_SUPABASE_ANON_KEY
 SUPABASE_SERVICE_ROLE_KEY
 RESEND_API_KEY
+RESEND_FROM_EMAIL (défaut : onboarding@resend.dev ; domaine vérifié en production)
 STRIPE_SECRET_KEY
 NEXT_PUBLIC_SITE_URL
 ADMIN_EMAILS=email1@x.com,email2@x.com

@@ -41,4 +41,8 @@ npx supabase stop           # arrête la stack locale
 
 Le schéma est figé dans `supabase/migrations/001_init.sql` ; ne pas le modifier sans validation. Les référentiels (départements, métiers) sont semés par `002_seed.sql`. Après toute évolution du schéma, relancer `./scripts/generate-types.sh`.
 
+### Photos des leads (Storage)
+
+La migration `003_storage.sql` crée le bucket privé `lead-photos` (5 Mo max par fichier, jpeg/png/webp). Aucune policy n'est définie sur `storage.objects` : seul le client admin (service role) y accède, depuis les server actions. Les chemins sont stockés dans `leads.photos` (`LD-AAAA-NNNN/n.jpg`). Pour l'appliquer sur le projet distant : `npx supabase link` puis `npx supabase db push`.
+
 Voir `CLAUDE.md` pour l'architecture et les conventions.

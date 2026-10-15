@@ -15,3 +15,5 @@ export type AssignmentInsert = TablesInsert<'assignments'>;
 export type LeadStatus = Enums<'lead_status'>;
 export type AssignmentStatus = Enums<'assignment_status'>;
 export type ArtisanStatus = Enums<'artisan_status'>;
+
+export type ActionResult<T> = { ok: true; data: T } | { ok: false; error: string };
